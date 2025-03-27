@@ -144,28 +144,49 @@ namespace LottoProject
             //meinlotto.Ziehen();
             //meinlotto.Treffer(meineZahlen, meinlotto.gezogen);
             int[] meineTreffer = new int[7];
+            int meinGeld = 2000;
             Random userRandom = new Random();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
 
                 for (int j = 0; j < meineZahlen.Length; j++)
                 {
-                    int meineZahl = userRandom.Next(1,50);
+                    int meineZahl = userRandom.Next(1, 50);
                     while (meineZahlen.Contains(meineZahl))
                     {
-                        meineZahl = userRandom.Next(1,50);
+                        meineZahl = userRandom.Next(1, 50);
                     }
                     meineZahlen[j] = meineZahl;
                 }
 
                 Lotto meinlotto = new Lotto(meineZahlen);
+                meinGeld = meinGeld - 5;
+                switch (meinlotto.anzahlTreffer)
+                {
+                    case 6:
+                        meinGeld = meinGeld + 100000000;
+                        break;
+                    case 5:
+                        meinGeld = meinGeld + 20000;
+                        break;
+                    case 4:
+                        meinGeld = meinGeld + 400;
+                        break;
+                    case 3:
+                        meinGeld = meinGeld + 20;
+                        break;
+                    default:
+                        meinGeld = meinGeld - 5;
+                        break;
+                }
                 meineTreffer[meinlotto.anzahlTreffer]++;
 
             }
-            for (int i = 0;i < meineTreffer.Length;i++)
+            for (int i = 0; i < meineTreffer.Length; i++)
             {
                 Console.WriteLine($"{i:00} Treffer: {meineTreffer[i]} Mal");
             }
+            Console.WriteLine($"Der Kontostand ist: {meinGeld}");
         }
     }
 }
