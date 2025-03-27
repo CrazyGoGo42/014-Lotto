@@ -130,6 +130,7 @@
 // }
 
 using System;
+using System.Diagnostics;
 
 namespace LottoProject
 {
@@ -137,6 +138,7 @@ namespace LottoProject
     {
         static void Main(string[] args)
         {
+            Stopwatch stopwatch = new Stopwatch();
             Console.WriteLine("Hello, World!");
             int[] meineZahlen = { 1, 12, 34, 45, 7, 11 };
 
@@ -145,8 +147,9 @@ namespace LottoProject
             //meinlotto.Treffer(meineZahlen, meinlotto.gezogen);
             int[] meineTreffer = new int[7];
             int meinGeld = 2000;
+            stopwatch.Start();
             Random userRandom = new Random();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
 
                 for (int j = 0; j < meineZahlen.Length; j++)
@@ -187,6 +190,8 @@ namespace LottoProject
                 Console.WriteLine($"{i:00} Treffer: {meineTreffer[i]} Mal");
             }
             Console.WriteLine($"Der Kontostand ist: {meinGeld}");
+            stopwatch.Stop();
+            Console.WriteLine($"Zeit: {stopwatch.ElapsedMilliseconds} ms");
         }
     }
 }
